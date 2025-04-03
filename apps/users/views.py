@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.tokens import RefreshToken
 from .serializers import UserSerializer
+from .serializers import EmptySerializer
 
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
@@ -11,6 +12,7 @@ class RegisterView(generics.CreateAPIView):
     permission_classes = [permissions.AllowAny]
 
 class LogoutView(generics.GenericAPIView):
+    serializer_class = EmptySerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request):
